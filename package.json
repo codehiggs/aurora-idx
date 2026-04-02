@@ -1,0 +1,62 @@
+{
+  "name": "aurora-idx",
+  "displayName": "AURORA for Project IDX",
+  "description": "Integrates AURORA AI assistant with Google Project IDX",
+  "version": "0.1.0",
+  "publisher": "higgs",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["AI", "Other"],
+  "keywords": ["aurora", "ai", "project-idx", "anthropic"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jalexiscv/aurora-idx"
+  },
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "AURORA for Project IDX",
+      "properties": {
+        "aurora.idx.port": {
+          "type": "number",
+          "default": 0,
+          "description": "Port for the MCP SSE server (0 = auto-assign)"
+        },
+        "aurora.idx.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically start the MCP server when the workspace opens"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "aurora.idx.startServer",
+        "title": "AURORA: Start MCP Server"
+      },
+      {
+        "command": "aurora.idx.stopServer",
+        "title": "AURORA: Stop MCP Server"
+      },
+      {
+        "command": "aurora.idx.showStatus",
+        "title": "AURORA: Show Connection Status"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json --watch",
+    "package": "npm run build && vsce package --out aurora-idx.vsix",
+    "publish:ovsx": "npm run build && ovsx publish aurora-idx.vsix"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "ovsx": "^0.9.0",
+    "typescript": "^5.3.0"
+  }
+}
